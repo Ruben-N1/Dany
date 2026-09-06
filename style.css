@@ -1,0 +1,134 @@
+/* Fuentes desde Google Fonts (se cargan en el navegador del usuario).
+   IMPORTANTE: @import debe ir siempre al principio del archivo CSS,
+   antes de cualquier otra regla (ni siquiera :root puede ir antes),
+   o el navegador lo ignora por completo. */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Parisienne&family=Pinyon+Script&family=Inter:wght@400;500&display=swap');
+
+/* ==========================================================
+   TOKENS DE DISEÑO
+   Todo el color/tipografía/espaciado vive aquí como variables.
+   Si quieres cambiar el tono del rojo/rosa del corazón, o el
+   tamaño del texto, este es el único lugar que necesitas tocar.
+   ========================================================== */
+:root {
+  /* Paleta */
+  --color-bg: #07020a;          /* negro con una pizca de morado, no negro puro */
+  --color-bg-vignette: #150014; /* tono para el degradado radial de fondo */
+  --color-neon-core: #ffffff;   /* núcleo blanco del brillo, como un tubo de neón real */
+  --color-neon-pink: #ff2d78;   /* rosa intenso principal del corazón */
+  --color-neon-red: #ff0a3c;    /* rojo intenso secundario, para el halo exterior */
+  --color-text-title: #ff5c8a;  /* color del título "Te amo" */
+  --color-text-subtitle: #b98a9a; /* gris-rosado apagado para el subtítulo */
+
+  /* Tipografía */
+  --font-title: 'Parisienne', cursive;   /* fuente manuscrita, sensación romántica */
+  --font-subtitle: 'Pinyon Script', cursive; /* fuente caligráfica elegante, como las letras script */
+  --font-body: 'Inter', system-ui, sans-serif; /* fuente limpia para texto de apoyo */
+
+  /* Espaciado */
+  --gap-hero: clamp(16px, 4vh, 32px);
+}
+
+/* ==========================================================
+   RESET BÁSICO
+   Quita márgenes por defecto y define box-sizing consistente
+   para que el layout se comporte de forma predecible.
+   ========================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* ==========================================================
+   SECCIÓN HERO
+   Ocupa toda la pantalla y centra el corazón + el texto.
+   Se usa flexbox en columna para apilar: canvas -> caption.
+   ========================================================== */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-hero);
+  padding: 5vh 5vw;
+
+  /* Viñeta radial: un leve resplandor morado/rosa detrás del corazón
+     que se apaga hacia las esquinas, para dar profundidad sin
+     restarle protagonismo al neón. */
+  background: radial-gradient(
+    ellipse at center,
+    var(--color-bg-vignette) 0%,
+    var(--color-bg) 60%
+  );
+}
+
+/* Canvas del corazón: se limita su tamaño máximo para que en
+   pantallas grandes no crezca de forma desproporcionada.
+   Se agrandó respecto a la versión anterior (era 640px / 65vh)
+   para que el corazón se vea bastante más grande. */
+#heart-canvas {
+  width: min(94vw, 880px);
+  height: min(94vw, 880px);
+  max-height: 78vh;
+  display: block;
+}
+
+/* Texto debajo del corazón */
+.hero__caption {
+  text-align: center;
+}
+
+.hero__title {
+  font-family: var(--font-title);
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  color: var(--color-text-title);
+  line-height: 1;
+
+  /* Brillo sutil que hace eco del neón del corazón, sin competir
+     con él (menos intensidad, menos capas). */
+  text-shadow:
+    0 0 8px rgba(255, 45, 120, 0.55),
+    0 0 22px rgba(255, 10, 60, 0.35);
+}
+
+.hero__subtitle {
+  margin-top: 6px;
+  font-family: var(--font-subtitle);
+  font-weight: 400;
+  /* Las fuentes tipo script se ven más chicas que una sans a igual
+     tamaño en px, por eso el rango es más grande que antes. */
+  font-size: clamp(1.4rem, 3.6vw, 2rem);
+  color: var(--color-text-subtitle);
+  letter-spacing: 0.02em;
+
+  /* Un brillo leve, en el mismo tono que el título, para que
+     "Perdoname si?" se sienta parte del mismo letrero de neón. */
+  text-shadow: 0 0 6px rgba(255, 45, 120, 0.35);
+}
+
+/* ==========================================================
+   ACCESIBILIDAD: reduced motion
+   Si el usuario tiene activada la preferencia de "reducir
+   movimiento" en su sistema, el script.js consulta este mismo
+   media query en JS (matchMedia) para bajar/quitar el pulso
+   de brillo animado del corazón.
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .hero__title {
+    text-shadow: 0 0 8px rgba(255, 45, 120, 0.55);
+  }
+}

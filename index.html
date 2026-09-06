@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ingresa la contraseña</title>
+
+  <!-- style.css trae los tokens compartidos (colores, fuentes) y el
+       import de Google Fonts. password.css trae solo lo específico
+       de esta pantalla (la caja de contraseña, el mensaje de error, etc). -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="password.css" />
+</head>
+<body class="password-body">
+
+  <!-- ============================================================
+       SECCIÓN: PANTALLA DE CONTRASEÑA
+       Pantalla completamente negra con una caja centrada, contorno
+       rosa, que pide la contraseña antes de dejar ver el corazón
+       (heart.html). Toda la lógica de validación vive en password.js.
+     ============================================================ -->
+  <section class="password-screen">
+
+    <form id="password-form" class="password-box" autocomplete="off">
+      <p class="password-box__title">Ingrese la contraseña</p>
+      <p class="password-box__hint">(Es el día que cumplimos mes)</p>
+
+      <input
+        id="password-input"
+        class="password-box__input"
+        type="password"
+        inputmode="numeric"
+        maxlength="2"
+        placeholder="••"
+        aria-label="Contraseña"
+      />
+
+      <button type="submit" class="password-box__button">Entrar</button>
+
+      <!-- Mensaje de error, oculto por defecto (ver password.css/.is-visible) -->
+      <p id="password-error" class="password-box__error">
+        Esa no es… inténtalo de nuevo
+      </p>
+    </form>
+
+  </section>
+
+  <script src="password.js"></script>
+</body>
+</html>

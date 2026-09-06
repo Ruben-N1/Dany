@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Te Amo</title>
+
+  <!-- Hoja de estilos separada, así el diseño se puede ajustar sin tocar el HTML -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       SECCIÓN: HERO / CORAZÓN
+       Es la única sección de la página por ahora. Contiene:
+       - Un <canvas> donde el script dibuja el corazón hecho de texto
+       - Un contenedor para el texto/CTA que aparece debajo del corazón
+       Al mantenerla dentro de <section id="hero">, en el futuro se
+       pueden agregar más <section> hermanas (ej: id="mensaje",
+       id="galeria") sin afectar esta.
+     ============================================================ -->
+  <section id="hero" class="hero">
+
+    <!-- Canvas donde se dibuja el corazón de "Te amo".
+         Se deja sin ancho/alto fijo en el HTML porque el script.js
+         lo ajusta dinámicamente al tamaño real de la pantalla. -->
+    <canvas id="heart-canvas"></canvas>
+
+    <!-- Texto opcional debajo del corazón. Editable libremente,
+         no afecta la lógica del canvas. -->
+    <div class="hero__caption">
+      <p class="hero__title">Te amo dany</p>
+      <p class="hero__subtitle">Perdoname si?</p>
+    </div>
+
+  </section>
+
+  <!-- El script va al final del body para que el HTML ya esté
+       cargado antes de que el JS intente acceder al canvas -->
+  <script src="script.js"></script>
+</body>
+</html>
